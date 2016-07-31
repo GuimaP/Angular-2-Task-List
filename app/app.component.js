@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var router_deprecated_1 = require('@angular/router-deprecated');
 var task_list_component_1 = require("./task-list.component");
+var task_edit_component_1 = require("./task-edit.component");
 var task_service_1 = require("./task.service");
 var AppComponent = (function () {
     function AppComponent() {
@@ -18,11 +19,12 @@ var AppComponent = (function () {
     }
     AppComponent = __decorate([
         router_deprecated_1.RouteConfig([
-            { path: '/task/list', name: 'Task.list', component: task_list_component_1.TaskList }
+            { path: '/task/list', name: 'Task.list', component: task_list_component_1.TaskList },
+            { path: '/task/:id/edit/', name: 'Task.edit', component: task_edit_component_1.TaskEdit }
         ]),
         core_1.Component({
             selector: "my-app",
-            template: "\n        <h1>{{title}}</h1>\n        <a [routerLink]=\"['Task.list']\">Listar Task</a>\n        <router-outlet></router-outlet>\n\n    ",
+            template: "\n        <h1>Controle de Tarefas</h1>\n        <a [routerLink]=\"['Task.list']\">Listar Task</a>\n        <router-outlet></router-outlet>\n\n    ",
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [task_service_1.TaskService]
         }), 

@@ -9,20 +9,32 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var Task_1 = require('./Task');
+var router_deprecated_1 = require("@angular/router-deprecated");
+var task_service_1 = require('./task.service');
 var TaskEdit = (function () {
-    function TaskEdit() {
+    function TaskEdit(params, route, taskService) {
+        this.params = params;
+        this.route = route;
+        this.taskService = taskService;
     }
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Task_1.Task)
-    ], TaskEdit.prototype, "task", void 0);
+    TaskEdit.prototype.ngOnInit = function () {
+        this.getTask();
+    };
+    TaskEdit.prototype.getTask = function () {
+        var id = this.params.get('id');
+        this.task = this.taskService.getTasks(id);
+        console.log(this.task);
+    };
+    TaskEdit.prototype.goToTaskList = function () {
+        console.log(this.task);
+        this.route.navigate(['Task.list']);
+    };
     TaskEdit = __decorate([
         core_1.Component({
             selector: 'task-edit',
-            template: "\n        <div *ngIf=\"task\">\n            <input type='text' [(ngModel)]='task.name'/>\n        </div>\n    "
+            template: "\n        <h3>Edi\u00E7\u00E3o de Tarefa</h3>\n        <div *ngIf=\"task\">\n            <input type='text' [(ngModel)]='task.name'/>\n            <button type=\"button\" (click)=\"goToTaskList()\">Salvar</button>\n        </div>\n    "
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [router_deprecated_1.RouteParams, router_deprecated_1.Router, task_service_1.TaskService])
     ], TaskEdit);
     return TaskEdit;
 }());

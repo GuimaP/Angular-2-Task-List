@@ -1,4 +1,5 @@
 import {Component,OnInit} from "@angular/core";
+import {Router} from "@angular/router-deprecated";
 import {TaskService} from "./task.service";
 import {TaskEdit} from "./task-edit.component";
 import {Task} from "./Task";
@@ -20,12 +21,13 @@ export class TaskList implements OnInit{
     selectedTask:Task;
 
     constructor(
-        private service:TaskService
+        private service:TaskService,
+        private router:Router
     ){}
 
     onClick(task){
-        console.log(task);
-        this.selectedTask = task;
+        this.router.navigate(['Task.edit',{id: task.id}]);
+
     }
 
     ngOnInit():any {
